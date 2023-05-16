@@ -1,0 +1,29 @@
+@server = 
+
+###
+GET {{server}}/person
+
+###
+POST {{server}}/person
+Content-Type: application/json
+
+{
+    "name": "",
+    "age": 0,
+    "email": ""
+}
+
+###
+GET {{server}}/person/
+
+###
+PUT {{server}}/person/
+Content-Type: application/json
+
+{
+    "age": 0
+}
+
+###
+DELETE {{server}}/person/
+

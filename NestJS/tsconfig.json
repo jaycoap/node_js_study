@@ -1,0 +1,9 @@
+{
+    "compilerOptions": { //컴파일러옵션
+        "module":"CommonJS", // 모듈 시스템, NodeJS의 모듈 시스템은 CommonJS이다.
+        "target": "ESNext", // 사용할 ES 버전 ESNext는 최신버전으로 컴파일
+        "experimentalDecorators": true, // 데코레이터 사용 여부 NestJS는 데코레이터를 사용하니 필수옵션
+        "emitDecoratorMetadata": true // 데코레이터의 메타 데이터를 같이 보낼지 여부, 
+                                    //Typescript를 JS로 컴파일시 데코레이터가 설정된 데이터를 함께 넣어줄지 여부 선택
+    }
+}
