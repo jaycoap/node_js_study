@@ -1,8 +1,8 @@
 import http from "k6/http" //K6로 성능 테스트
 
 export const options = { //테스트 옵션
-    vus: 100, // 100명이
-    duration: "10s", //10초 동안 계속 요청을 보내는 설정
+    vus: 1000, // 100명이
+    duration: "1s", //10초 동안 계속 요청을 보내는 설정
 };
 
 export default function (){

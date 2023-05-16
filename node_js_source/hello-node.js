@@ -1,6 +1,6 @@
 const http = require("http"); // http 객체 생성
 
-let count = 0;
+var count = 0;
 // node server 객체 생성
 const server = http.createServer((req,res) =>{
     log(count) //카운트 1 증가
@@ -13,7 +13,7 @@ const server = http.createServer((req,res) =>{
 
     },2000);
 });
-function log(count){
+function log(){
     console.log((count+=1))
 }
 

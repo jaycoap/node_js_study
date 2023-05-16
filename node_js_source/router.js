@@ -10,7 +10,7 @@ http.createServer((req, res)=>{
     } else{
         notFound(req, res);
     }
-}).listen("3000",()=>console.log("http://localhost:3000/"));
+}).listen("3000",()=>console.log("http://localhost:3000/user?name=jaycoap&age=26"));
 
 
 

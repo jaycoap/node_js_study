@@ -32,7 +32,11 @@ function getResult(user) {
 // then을 사용함으로써 호출되는 함수를 순서대로 호출
 function registerByPromise(user) {
     //비동기 호출이지만, 순서를 지켜서 실행
-    const result = saveDB(user).then(sendEmail).then(getResult).catch(error => new Error(error)).finally(()=>console.log("finish"));
+    const result = saveDB(user)
+    .then(sendEmail)
+    .then(getResult)
+    .catch(error => new Error(error))
+    .finally(()=>console.log("finish"));//성공, 실패 여부에 관계없이 실행
     console.log(result); // 아직 완료되지 않았음으로 지연(panding) 상태
     return result;
 }
