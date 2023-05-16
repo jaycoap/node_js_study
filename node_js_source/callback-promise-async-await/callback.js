@@ -41,7 +41,7 @@ function registerByPromise(user) {
     return result;
 }
 
-const myUser = { email: "yooqoxo@naver.com", password: "1234", name: "jaycoap" };
+const myUser = { email: "", password: "", name: "" };
 const result = registerByPromise(myUser);
 //결과 값이 Promise이기에 then()메소드에 함수를 넣어 결과 값을 볼 수 있음.
 result.then(console.log);
