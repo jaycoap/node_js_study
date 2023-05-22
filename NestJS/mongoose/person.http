@@ -1,29 +1,36 @@
-@server = 
+// 기능에 대한 결과를 확인 하기 위한 HTTP 설정
+// Server 변수 설정
+@server = http://localhost:3000
 
+//GET 요청 보내기
 ###
 GET {{server}}/person
 
+//POST 요청 보내기
 ###
 POST {{server}}/person
 Content-Type: application/json
 
 {
     "name": "",
-    "age": 0,
+    "age": 27,
     "email": ""
 }
 
+// 생성한 문서 확인
 ###
 GET {{server}}/person/
 
+// PUT 요청 보내기
 ###
 PUT {{server}}/person/
 Content-Type: application/json
 
 {
-    "age": 0
+    "age": 28
 }
 
+// DELETE요청 보내기
 ###
 DELETE {{server}}/person/
 
