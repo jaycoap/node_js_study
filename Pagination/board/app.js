@@ -41,15 +41,15 @@ app.get("/detail/:id", async(req, res)=>{
     });
 });
 
-app.get("/", async(req, res)=>{
-    const page = parseInt(req.query.page) || 1;
-    const search = req.query.search || "";
+app.get("/", async(req, res)=>{ // 메인 페이지 화면은 아무 path가 없기때문에 "/"을 쓴다.
+    const page = parseInt(req.query.page) || 1; //현재 페이지 데이터
+    const search = req.query.search || ""; // 검색어 데이터
     try{
-        const [posts,paginator] = await postService.list(collection, page, search);
-        res.render("home", {title: "테스트 게시판", search, paginator, posts});
+        const [posts,paginator] = await postService.list(collection, page, search); //postService.list에서 글 목록과 Paginator를 가져온다.
+        res.render("home", {title: "테스트 게시판", search, paginator, posts}); // 메인 페이지 렌더링
     }catch(error){
         console.log(error);
-        res.render("home", {title: "테스트 게시판"});
+        res.render("home", {title: "테스트 게시판"}); // 에러일 경우 빈값을 렌더링
     }
 });
 

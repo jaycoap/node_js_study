@@ -20,29 +20,29 @@
             </tr>
         </thead>
         <tbody>
-            {{#each posts}}
+            {{#each posts}} <!-- 게시글 표시 데이터 -->
             <tr>
-                <td><a href="/detail/{{_id}}">{{title}}</a></td>
+                <td><a href="/detail/{{_id}}">{{title}}</a></td> <!-- 게시글 상세 페이지 링크 -->
                 <td>{{writer}}</td>
                 <td>{{hits}}</td>
-                <td>{{dateString createdDt}}</td>
+                <td>{{dateString createddt}}</td> <!-- dateString Helper 사용 -->
             </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
 
-<!--페이징 영역, '<'표시는 &lt;, '>'표시는 &gt;-->
+<!--페이징 영역, '<'표시는 &lt;, '>'표시는 &gt;, @root는 서버의 원본 참조 시 사용-->
 <div>
-    {{#with paginator}}
+    {{#with paginator}} <!--Paginetor 기능 사용-->
     <a href ="/?page=1&search={{@root.search}}">&lt;&lt;</a>
-    {{#if hasPrev}}
-    <a href="/?page={{prevPage}}&search={{@root.search}}">&lt;</a>
+    {{#if hasPrev}} 
+    <a href="/?page={{prevPage}}&search={{@root.search}}">&lt;</a> <!--Page가 1이 아닌경우 이전페이지 링크-->
     {{else}}
-    <a>&lt;</a>
+    <a>&lt;</a> <!--Page가 1인 경우 이전페이지가 없어 링크 없음-->
     {{/if}}
     {{#each pageList}}
-    {{#if (eq . @root.paginator.page)}}
+    {{#if (eq . @root.paginator.page)}} <!-- 두수를 비교하는 eq Helper 사용 -->
     <a>{{.}}</a>
     {{else}}
     <a href = "/?page={{.}}&search={{@root.search}}">{{.}}</a>
@@ -51,7 +51,7 @@
     {{#if hasNext}}
     <a href="/?page={{nextPage}}&search={{@root.search}}">&gt;</a>
     {{else}}
-    <a>&gt;</a>
+    <a>&gt;</a> <!-- 마지막 페이지인 경우 링크 없음 -->
     {{/if}}
     <a href="/?page={{lastPage}}&search={{@root.search}}">&gt;&gt;</a>
     {{/with}}
