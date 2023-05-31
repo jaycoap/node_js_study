@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@nestjs/common": "^9.4.2",
+    "@nestjs/core": "^9.4.2",
+    "@nestjs/platform-express": "^9.4.2",
+    "reflect-metadata": "^0.1.13",
     "typescript": "^5.0.4"
   }
 }

@@ -1,42 +1,173 @@
-<h1>{{title}}</h1> <!--타이틀 영역, {{title}}은 서버에서 내려주는 변수-->
+<div class="board">
 
-<!--검색어 영역-->
-<input type = "text" name = "search" id = "search" value="" size="50" placeholder="Write answer"/>
-<button onclick="location.href=`/?search=${document.getElementById('search').value}`">search</button>
-<br/>
-<!-- 글쓰기 페이지 링크 이동-->
-<a href="/write">wirting</a>
-<br/>
+    <style>
+        .header{
+            display: flex;
+            text-align: auto;
+        }
+        .board {
+            background-color: #00ff00;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient( #f2f2f2, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-<!--글 목록-->
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th width="50%">제목</th>
-                <th>작성자</th>
-                <th>조회수</th>
-                <th>등록일</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each posts}} <!-- 게시글 표시 데이터 -->
-            <tr>
-                <td><a href="/detail/{{_id}}">{{title}}</a></td> <!-- 게시글 상세 페이지 링크 -->
-                <td>{{writer}}</td>
-                <td>{{hits}}</td>
-                <td>{{dateString createddt}}</td> <!-- dateString Helper 사용 -->
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+        @media(max-width:768px) {
+            .board {
+                background-color: #f22;
+            }
+        }
+
+        .board-header {
+       
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-spacing: 10px;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .search-input {
+            width: 200px;
+            padding: 5px;
+            margin-right: 0px;
+
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            margin-right: 10px;
+        }
+
+        .write-link {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            margin-right: auto;
+            border-radius: 10px;
+
+        }
+
+        /* 게시물 테이블 스타일 */
+        .board-table {
+            width: 800px;
+            margin-left: auto;
+            margin-right:auto;
+            margin-top: 20px;
+
+            justify-content: center;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            border-spacing: 20px;
+
+            table-layout: :fixed;
+            background-color: #f5f4f3;
+            border: 1px solid #ccc;
+            padding-top: 30px;
+            padding-bottom: 20px;
+            margin-top: 20px;
+            
+            
+
+        }
+
+        .board-table th,
+        {
+        background-color: #ddd;
+        font-weight: bold;
+        width: 20%;
+        align-items:center;
+            text-align: center;
+        }
+
+        .board-table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+            color: #333;
+            align-items:center;
+            text-align: center;
+
+        }
+
+        /* 페이지 이동 스타일 */
+        .pagination {
+        
+            justify-content: center;
+            margin-top: 20px;
+        
+            text-align: center;
+        }
+
+    
+        .pagination a {
+            justify-content: center;
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #f5f5f5;
+            color: #333;
+            margin-bottom: auto;
+            margin-left: auto;
+            margin-right:auto;
+        }
+    </style>
+    <h1 class = "header">{{title}}</h1> <!--타이틀 영역, {{title}}은 서버에서 내려주는 변수-->
+
+
+    <!--검색어 영역-->
+    <div class="board-header">
+        <input class="search-input" type="text" name="search" id="search" value="" placeholder="검색어를 입력해주세요" />
+        <button class="search-button"
+            onclick="location.href=`/?search=${document.getElementById('search').value}`">search</button>
+        <!-- 글쓰기 페이지 링크 이동-->
+        <a href="/write" class="write-link">글 작성</a>
+        <br />
+    </div>
 </div>
 
+
+    <br />
+
+    <!--글 목록-->
+    <div>
+        <table class="board-table">
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>조회수</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each posts}} <!-- 게시글 표시 데이터 -->
+                <tr>
+                    <td><a href="/detail/{{_id}}">{{title}}</a></td> <!-- 게시글 상세 페이지 링크 -->
+                    <td>{{writer}}</td>
+                    <td>{{hits}}</td>
+                    <td>{{dateString createddt}}</td> <!-- dateString Helper 사용 -->
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+
 <!--페이징 영역, '<'표시는 &lt;, '>'표시는 &gt;, @root는 서버의 원본 참조 시 사용-->
-<div>
+<div class="pagination">
     {{#with paginator}} <!--Paginetor 기능 사용-->
-    <a href ="/?page=1&search={{@root.search}}">&lt;&lt;</a>
-    {{#if hasPrev}} 
+    <a href="/?page=1&search={{@root.search}}">&lt;&lt;</a>
+    {{#if hasPrev}}
     <a href="/?page={{prevPage}}&search={{@root.search}}">&lt;</a> <!--Page가 1이 아닌경우 이전페이지 링크-->
     {{else}}
     <a>&lt;</a> <!--Page가 1인 경우 이전페이지가 없어 링크 없음-->
@@ -45,7 +176,7 @@
     {{#if (eq . @root.paginator.page)}} <!-- 두수를 비교하는 eq Helper 사용 -->
     <a>{{.}}</a>
     {{else}}
-    <a href = "/?page={{.}}&search={{@root.search}}">{{.}}</a>
+    <a href="/?page={{.}}&search={{@root.search}}">{{.}}</a>
     {{/if}}
     {{/each}}
     {{#if hasNext}}
@@ -55,4 +186,6 @@
     {{/if}}
     <a href="/?page={{lastPage}}&search={{@root.search}}">&gt;&gt;</a>
     {{/with}}
+</div>
+</form>
 </div>
